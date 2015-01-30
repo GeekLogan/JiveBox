@@ -1,8 +1,8 @@
 /*
     Author: Logan Walker (GeekLogan)
-    Date: 30 January 2015
-    Version: 0.01 Pre-Alpha
-    Description: Do some stuff with sound
+ Date: 30 January 2015
+ Version: 0.01 Pre-Alpha
+ Description: Do some stuff with sound
  */
 
 //define constants using define for compiler-level simplification
@@ -32,11 +32,12 @@ void setup() {
 void loop() {
   inPos = analogRead(analogInPos);
   inNeg = analogRead(analogInNeg);
-  
+
   //Add Sound Edit Code Here
   outPos = inPos;
   outNeg = inNeg;
-  
+
   analogWrite(digitalOutPos, outPos / 4);
   analogWrite(digitalOutNeg, outNeg / 4);
 }
+
