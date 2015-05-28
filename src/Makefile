@@ -18,6 +18,7 @@ gnu-verbose:
 
 clean:
 	rm -f ../bin/jive
+	rm -f TMP
 
 release:
 	make clean
