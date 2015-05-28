@@ -1,25 +1,25 @@
 all:
-	make utilities
-	make filters
-	make jive
+	cc -o ../bin/jive jive.c -lm
+	cc -o ../bin/filters filters.c -lm
+	cc -o ../bin/utilities utilities.c -lm 
 
 mac-verbose:
-	cc -o jive jive.c -lm -v
-	cc -o filters filters.c -lm -v
-	cc -o utilities utilities.c -lm -v
+	cc -o ../bin/jive jive.c -lm -v
+	cc -o ../bin/filters filters.c -lm -v
+	cc -o ../bin/utilities utilities.c -lm -v
 
 ubuntu:
-	gcc -o jive jive.c -lm
-	gcc -o filters filters.c -lm
-	gcc -o utilities utilities.c -lm
+	gcc -o ../bin/jive jive.c -lm
+	gcc -o ../bin/filters filters.c -lm
+	gcc -o ../bin/utilities utilities.c -lm
 
 ubuntu-verbose:
-	gcc -o jive jive.c -lm -v
-	gcc -o filters filters.c -lm -v
-	gcc -o utilities utilities.c -lm -v
+	gcc -o ../bin/jive jive.c -lm -v
+	gcc -o ../bin/filters filters.c -lm -v
+	gcc -o ../bin/utilities utilities.c -lm -v
 
 
 clean:
-	rm -f jive
-	rm -f filters
-	rm -f utilities
+	rm -f ../bin/jive
+	rm -f ../bin/filters
+	rm -f ../bin/utilities
