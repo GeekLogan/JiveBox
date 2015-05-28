@@ -7,15 +7,6 @@
 #include "synth.h"
 #include "filters.h"
 
-union BufferType {
-	signed short int input;
-	char parts[2];
-};
-
-void writeBuffer(union BufferType piece) {
-	fprintf(stdout, "%c%c", piece.parts[0], piece.parts[1]);
-}
-
 union BufferType buffer;
 long long int sampletotal;
 int samples;

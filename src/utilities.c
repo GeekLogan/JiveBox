@@ -1,5 +1,9 @@
 #include "utilities.h"
 
+void writeBuffer(union BufferType piece) {
+	fprintf(stdout, "%c%c", piece.parts[0], piece.parts[1]);
+}
+
 void delayNanoSecs(long int seconds, long int nanoseconds) {
 	struct timespec time, time2;
 	time.tv_sec = seconds;
