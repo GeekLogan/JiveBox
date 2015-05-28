@@ -1,16 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include <time.h>
 
 #include "constants.h"
+#include "utilities.h"
 #include "filters.h"
-
-
-union BufferType buffer;
-long long int sampletotal;
-int samples;
-double timeDiff;
 
 union BufferType {
 	signed short int input;
@@ -21,12 +15,10 @@ void writeBuffer(union BufferType piece) {
 	fprintf(stdout, "%c%c", piece.parts[0], piece.parts[1]);
 }
 
-void delayNanoSecs(long int seconds, long int nanoseconds) {
-	struct timespec time, time2;
-	time.tv_sec = seconds;
-	time.tv_nsec = nanoseconds;
-	nanosleep(&time , &time2);
-}
+union BufferType buffer;
+long long int sampletotal;
+int samples;
+double timeDiff;
 
 int main(int argCount, char ** args) {
 	fprintf(stderr, "Starting JiveBox 0.1 Terminal...\n");
