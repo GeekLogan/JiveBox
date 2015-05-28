@@ -4,6 +4,7 @@
 
 #include "constants.h"
 #include "utilities.h"
+#include "synth.h"
 #include "filters.h"
 
 union BufferType {
