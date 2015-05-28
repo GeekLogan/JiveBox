@@ -1,13 +1,11 @@
-#define TWOPI (M_PI * 2)
-#define PI M_PI
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 #include <time.h>
 
-#define BITHEIGHT 32766
-#define FREQUENCY 44000
+#include "constants.h"
+#include "filters.h"
+
 
 union BufferType buffer;
 long long int sampletotal;
