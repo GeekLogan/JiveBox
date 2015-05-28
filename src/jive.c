@@ -23,9 +23,10 @@ double makeNoise(double t) {
 }
 
 signed short doFilters(signed short in) {
-	in = lowpass_filter(in, (signed short) (BITHEIGHT * 0.5));
-	in = highpass_filter(in, (signed short) (BITHEIGHT * 0.1));
-	in = gain_filter(in, 2);
+	//in = lowpass_filter(in, (signed short) (BITHEIGHT * 0.5));
+	//in = highpass_filter(in, (signed short) (BITHEIGHT * 0.1));
+	//in = gain_filter(in, 2);
+	in = bitcrush_filter(in, 4000);
 	return in;
 }
 

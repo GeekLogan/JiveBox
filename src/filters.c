@@ -28,3 +28,9 @@ signed short gain_filter(signed short val, double rate) {
 double gain_filter_lossless(double val, double rate) {
     return val * rate;
 }
+
+signed short bitcrush_filter(signed short val, double rate) {
+    val = gain_filter(val, 1 / rate);
+    val = gain_filter(val , rate);
+    return val;
+}
