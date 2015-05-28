@@ -40,6 +40,11 @@ double addSounds(double one, double two) {
 	return res;
 }
 
+double addSoundsWeighted(double one, double oneWeight, double two, double twoWeight) {
+	double res = ( one * oneWeight + two * twoWeight);
+	return res;
+}
+
 short signed int rasterizeSound(double in) {
 	double res = in;
 	res *= BITHEIGHT;
