@@ -6,7 +6,7 @@
 #include <math.h>
 #include <time.h>
 
-#define BITHEIGHT 32765
+#define BITHEIGHT 32766
 #define FREQUENCY 44000
 
 union BufferType buffer;
@@ -48,7 +48,9 @@ int main(int argCount, char ** args) {
 	timeDiff = 1.0 / FREQUENCY;
 	double timeDiff_uSeconds = timeDiff * 1000000;
 
-	for(unsigned short int wavefreq = 200; wavefreq < 1000; wavefreq += 100) {
+	unsigned short int wavefreq = 0;
+	while (wavefreq < 100) {
+		wavefreq += 10;
 
 		sampletotal = 0;
 		samples = 0;
@@ -56,7 +58,9 @@ int main(int argCount, char ** args) {
 		while((sampletotal + samples) < FREQUENCY * 3) {
 			writeBuffer(buffer);
 
-			double fofx = sin(TWOPI * wavefreq * timeDiff * (samples + sampletotal));
+			double x = TWOPI * wavefreq * timeDiff * (samples + sampletotal);
+			double fofx = sin(x);
+			fofx += sin(x + 1);
 			fofx *= BITHEIGHT;
 			fofx = floor(fofx);
 			buffer.input = (signed int) fofx;
