@@ -46,7 +46,7 @@ int main(int argCount, char ** args) {
 
 	while(getTotalSamples() < FREQUENCY) { //loop once
 		if(getTotalSamples() % 250 == 0) {
-			writeBufferHumanReadable(buffer, 150);
+			writeBufferHumanReadable(buffer, CONSOLEWIDTH);
 		}
 		writeBuffer(buffer);
 

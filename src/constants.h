@@ -5,3 +5,4 @@
 
 #define BITHEIGHT 32766
 #define FREQUENCY 44000
+#define CONSOLEWIDTH 200
