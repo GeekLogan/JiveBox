@@ -5,26 +5,25 @@ void writeBuffer(union BufferType piece) {
 }
 
 void writeBufferHumanReadable(union BufferType piece, int charCount) {
-	if(charCount % 2 == 0)
-		charCount++;
+	if(charCount % 2 == 0) charCount++;
 	int middle = (charCount / 2) + 1;
 	int point = piece.input;
 	point /= (BITHEIGHT / (charCount / 2));
-	point += charCount / 2;
+	point += (charCount / 2);
 
-	fprintf(stdout, "|");
+	fprintf(stderr, "|");
 	for(int i = 0; i < charCount; i++) {
 		if(i == middle || i == point) {
 			if(i == point) {
-				fprintf(stdout, "*");
+				fprintf(stderr, "*");
 			} else {
-				fprintf(stdout, "|");
+				fprintf(stderr, "|");
 			}
 		} else {
-			fprintf(stdout, " ");
+			fprintf(stderr, " ");
 		}
 	}
-	fprintf(stdout, "|\n");
+	fprintf(stderr, "|\n");
 }
 
 void delayNanoSecs(long int seconds, long int nanoseconds) {
