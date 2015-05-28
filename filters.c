@@ -20,6 +20,6 @@ signed short highpass_filer(signed short val, signed short filter) {
     }
 }
 
-//below prevents compiler errors due to
-//this file not being executable
+/* below prevents compiler errors due to
+this file not being executable */
 int main(int argCount, char ** args){}

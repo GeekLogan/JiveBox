@@ -7,6 +7,6 @@ void delayNanoSecs(long int seconds, long int nanoseconds) {
 	nanosleep(&time , &time2);
 }
 
-//below prevents compiler errors due to
-//this file not being executable
+/* below prevents compiler errors due to
+this file not being executable */
 int main(int argCount, char ** args){}
