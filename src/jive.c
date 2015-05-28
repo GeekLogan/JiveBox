@@ -13,7 +13,7 @@ int samples;
 double timeDiff;
 
 long long int getTotalSamples() {
-	return (samples + sampletotal); 
+	return (samples + sampletotal);
 }
 
 int main(int argCount, char ** args) {
@@ -44,10 +44,7 @@ int main(int argCount, char ** args) {
 		while((sampletotal + samples) < FREQUENCY * 3) {
 			writeBuffer(buffer);
 
-			double one = sine_synth(timeDiff * (samples + sampletotal), wavefreq);
-			double two = sine_synth(timeDiff * (samples + sampletotal), wavefreq + 1);
-
-			double fofx = addSounds(one, two);
+			double fofx = sine_beat_synth(timeDiff * getTotalSamples(), wavefreq, 1);
 			buffer.input = rasterizeSound(fofx);
 
 			samples++;
