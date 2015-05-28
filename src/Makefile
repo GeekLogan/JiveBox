@@ -27,3 +27,8 @@ clean:
 	rm -f ../bin/filters
 	rm -f ../bin/utilities
 	rm -f ../bin/synth
+
+release:
+	make clean
+	make
+	zip -r ../release.zip ../bin
