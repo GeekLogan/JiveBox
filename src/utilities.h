@@ -10,6 +10,7 @@ union BufferType {
 	char parts[2];
 };
 
+double convertSecondsToMicroSeconds(double seconds);
 void writeBuffer(union BufferType piece);
 void writeBufferHumanReadable(union BufferType piece, int charCount);
 void delayNanoSecs(long int seconds, long int nanoseconds);

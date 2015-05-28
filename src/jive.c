@@ -40,7 +40,6 @@ int main(int argCount, char ** args) {
 	fprintf(stderr, "Starting Data Generation:\n\n");
 
 	timeDiff = 1.0 / FREQUENCY;
-	//double timeDiff_uSeconds = timeDiff * 1000000;
 	sampletotal = 0;
 	samples = sampletotal;
 

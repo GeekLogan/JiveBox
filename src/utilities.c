@@ -1,5 +1,9 @@
 #include "utilities.h"
 
+double convertSecondsToMicroSeconds(double seconds) {
+	return(seconds * 1000000);
+}
+
 void writeBuffer(union BufferType piece) {
 	fprintf(stdout, "%c%c", piece.parts[0], piece.parts[1]);
 }
