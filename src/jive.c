@@ -34,27 +34,25 @@ int main(int argCount, char ** args) {
 	timeDiff = 1.0 / FREQUENCY;
 	double timeDiff_uSeconds = timeDiff * 1000000;
 
-	unsigned short int wavefreq = 0;
-	while (wavefreq < 100) {
-		wavefreq += 10;
+	unsigned short int wavefreq = 10;
 
-		sampletotal = 0;
-		samples = 0;
+	sampletotal = 0;
+	samples = 0;
 
-		while((sampletotal + samples) < FREQUENCY * 3) {
-			writeBuffer(buffer);
+	while(getTotalSamples() < FREQUENCY) {
+		if(getTotalSamples() % 200 == 0)
+			writeBufferHumanReadable(buffer, 100);
 
-			double fofx = sine_beat_synth(timeDiff * getTotalSamples(), wavefreq, 1);
-			buffer.input = rasterizeSound(fofx);
+		double fofx = sine_beat_synth(timeDiff * getTotalSamples(), wavefreq, 1);
+		buffer.input = rasterizeSound(fofx);
 
-			samples++;
-			if(samples == FREQUENCY) {
-				sampletotal += samples;
-				samples = 0;
-			}
+		samples++;
+		if(samples == FREQUENCY) {
+			sampletotal += samples;
+			samples = 0;
 		}
-
 	}
+
 
 	return 0;
 }
