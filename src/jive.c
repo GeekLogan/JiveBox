@@ -12,6 +12,10 @@ long long int sampletotal;
 int samples;
 double timeDiff;
 
+long long int getTotalSamples() {
+	return (samples + sampletotal); 
+}
+
 int main(int argCount, char ** args) {
 	fprintf(stderr, "Starting JiveBox 0.1 Terminal...\n");
 
@@ -40,12 +44,10 @@ int main(int argCount, char ** args) {
 		while((sampletotal + samples) < FREQUENCY * 3) {
 			writeBuffer(buffer);
 
-			double x = TWOPI  * timeDiff * (samples + sampletotal);
-			double one = sin(x * wavefreq);
-			double two = sin(x * (wavefreq + 1));
+			double one = sine_synth(timeDiff * (samples + sampletotal), wavefreq);
+			double two = sine_synth(timeDiff * (samples + sampletotal), wavefreq + 1);
 
 			double fofx = addSounds(one, two);
-
 			buffer.input = rasterizeSound(fofx);
 
 			samples++;
