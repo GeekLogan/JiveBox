@@ -1,5 +1,5 @@
-#define TWOPI 6.2831853
-#define PI 3.1415926
+#define TWOPI (M_PI * 2)
+#define PI M_PI
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -77,4 +77,3 @@ int main(int argcnt, char ** args) {
 
 	return 0;
 }
-
