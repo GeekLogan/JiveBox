@@ -7,6 +7,15 @@ void delayNanoSecs(long int seconds, long int nanoseconds) {
 	nanosleep(&time , &time2);
 }
 
-/* below prevents compiler errors due to
-this file not being executable */
-int main(int argCount, char ** args){}
+double addSounds(double one, double two) {
+	double res = one + two;
+	res /= 2.0;
+	return res;
+}
+
+short signed int rasterizeSound(double in) {
+	double res = in;
+	res *= BITHEIGHT;
+	res = floor(res);
+	return (signed int) res;
+}

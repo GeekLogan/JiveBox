@@ -19,7 +19,3 @@ signed short highpass_filer(signed short val, signed short filter) {
         return val;
     }
 }
-
-/* below prevents compiler errors due to
-this file not being executable */
-int main(int argCount, char ** args){}

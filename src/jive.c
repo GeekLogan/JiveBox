@@ -49,12 +49,13 @@ int main(int argCount, char ** args) {
 		while((sampletotal + samples) < FREQUENCY * 3) {
 			writeBuffer(buffer);
 
-			double x = TWOPI * wavefreq * timeDiff * (samples + sampletotal);
-			double fofx = sin(x);
-			fofx += sin(x + 1);
-			fofx *= BITHEIGHT;
-			fofx = floor(fofx);
-			buffer.input = (signed int) fofx;
+			double x = TWOPI  * timeDiff * (samples + sampletotal);
+			double one = sin(x * wavefreq);
+			double two = sin(x * (wavefreq + 1));
+
+			double fofx = addSounds(one, two);
+
+			buffer.input = rasterizeSound(fofx);
 
 			samples++;
 			if(samples == FREQUENCY) {
