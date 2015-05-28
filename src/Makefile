@@ -1,7 +1,7 @@
 all:
 	cc -o ../bin/jive jive.c -lm
 	cc -o ../bin/filters filters.c -lm
-	cc -o ../bin/utilities utilities.c -lm 
+	cc -o ../bin/utilities utilities.c -lm
 
 mac-verbose:
 	cc -o ../bin/jive jive.c -lm -v
@@ -17,7 +17,6 @@ ubuntu-verbose:
 	gcc -o ../bin/jive jive.c -lm -v
 	gcc -o ../bin/filters filters.c -lm -v
 	gcc -o ../bin/utilities utilities.c -lm -v
-
 
 clean:
 	rm -f ../bin/jive
