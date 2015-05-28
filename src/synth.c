@@ -15,3 +15,9 @@ double sine_beat_synth(double t, int wavefreq, int bps) {
     double two = sine_synth(t, wavefreq + bps);
     return addSounds(one, two);
 }
+
+double cos_beat_synth(double t, int wavefreq, int bps) {
+    double one = cosine_synth(t, wavefreq);
+    double two = cosine_synth(t, wavefreq + bps);
+    return addSounds(one, two);
+}

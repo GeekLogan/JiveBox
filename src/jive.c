@@ -22,6 +22,13 @@ double makeNoise(double t) {
 	return fofx;
 }
 
+signed short doFilters(signed short in) {
+	in = lowpass_filter(in, (signed short) (BITHEIGHT * 0.5));
+	in = highpass_filter(in, (signed short) (BITHEIGHT * 0.1));
+	in = gain_filter(in, 2);
+	return in;
+}
+
 int main(int argCount, char ** args) {
 	buffer.input = 0;
 
@@ -49,8 +56,9 @@ int main(int argCount, char ** args) {
 		}
 		writeBuffer(buffer);
 
-		double cur = makeNoise(timeDiff * getTotalSamples());
-		buffer.input = rasterizeSound(cur);
+		double fromGenerator = makeNoise(timeDiff * getTotalSamples());
+		signed short toProcess = rasterizeSound(fromGenerator);
+		buffer.input = doFilters(toProcess);
 
 		samples++;
 		if(samples == FREQUENCY) {
