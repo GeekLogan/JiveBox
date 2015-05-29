@@ -17,16 +17,14 @@ long long int getTotalSamples() {
 }
 
 double makeNoise(double t) {
-	unsigned short int wavefreq = 10;
-	double fofx = sine_beat_synth(t, wavefreq, 1);
-	return fofx;
+	return fm_synth(t, 5, 5);
 }
 
 signed short doFilters(signed short in) {
 	//in = lowpass_filter(in, (signed short) (BITHEIGHT * 0.5));
 	//in = highpass_filter(in, (signed short) (BITHEIGHT * 0.1));
 	//in = gain_filter(in, 2);
-	in = bitcrush_filter(in, 4000);
+	//in = bitcrush_filter(in, 4000);
 	return in;
 }
 
@@ -52,7 +50,8 @@ int main(int argCount, char ** args) {
 	samples = sampletotal;
 
 	while(getTotalSamples() < FREQUENCY) { //loop once
-		if(getTotalSamples() % 250 == 0) {
+		if(getTotalSamples() % 150 == 0) {
+			//fprintf(stderr, "[%d]\n", buffer.input);
 			writeBufferHumanReadable(buffer, CONSOLEWIDTH);
 		}
 		writeBuffer(buffer);

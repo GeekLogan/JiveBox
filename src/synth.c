@@ -21,3 +21,9 @@ double cos_beat_synth(double t, int wavefreq, int bps) {
     double two = cosine_synth(t, wavefreq + bps);
     return addSounds(one, two);
 }
+
+double fm_synth(double t, int wavefreq1, int wavefreq2) {
+    double x = TWOPI * t * wavefreq1;
+    //fprintf(stderr, "=> [%f]\n", x);
+    return sin(x + sine_synth(t, wavefreq2));
+}
