@@ -16,7 +16,8 @@ void writeBufferHumanReadable(union BufferType piece, int charCount) {
 	point += (charCount / 2);
 
 	fprintf(stderr, "|");
-	for(int i = 0; i < charCount; i++) {
+	int i;
+	for(i = 0; i < charCount; i++) {
 		if(i == middle || i == point) {
 			if(i == point) {
 				fprintf(stderr, "*");

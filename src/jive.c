@@ -49,9 +49,8 @@ int main(int argCount, char ** args) {
 	sampletotal = 0;
 	samples = sampletotal;
 
-	while(getTotalSamples() < FREQUENCY) { //loop once
-		if(getTotalSamples() % 150 == 0) {
-			//fprintf(stderr, "[%d]\n", buffer.input);
+	while(getTotalSamples() < FREQUENCY) {
+		if(getTotalSamples() % 250 == 0) {
 			writeBufferHumanReadable(buffer, CONSOLEWIDTH);
 		}
 		writeBuffer(buffer);
