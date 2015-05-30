@@ -17,7 +17,8 @@ long long int getTotalSamples() {
 }
 
 double makeNoise(double t) {
-	return fm_synth(t, 5, 5);
+	//return fm_synth(t, 4, 9);
+	return sawtooth_synth(t, 2);
 }
 
 signed short doFilters(signed short in) {
@@ -50,7 +51,7 @@ int main(int argCount, char ** args) {
 	samples = sampletotal;
 
 	while(getTotalSamples() < FREQUENCY) {
-		if(getTotalSamples() % 250 == 0) {
+		if(getTotalSamples() % 100 == 0) {
 			writeBufferHumanReadable(buffer, CONSOLEWIDTH);
 		}
 		writeBuffer(buffer);

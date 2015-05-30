@@ -24,6 +24,12 @@ double cos_beat_synth(double t, int wavefreq, int bps) {
 
 double fm_synth(double t, int wavefreq1, int wavefreq2) {
     double x = TWOPI * t * wavefreq1;
-    //fprintf(stderr, "=> [%f]\n", x);
     return sin(x + sine_synth(t, wavefreq2));
+}
+
+double sawtooth_synth(double t, int wavefreq) {
+    double x = t * wavefreq;
+    x = (x - floor(0.5 + x));
+    x *= 2.0;
+    return x;
 }
