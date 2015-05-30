@@ -19,6 +19,7 @@ gnu-verbose:
 clean:
 	rm -f ../bin/jive
 	rm -f TMP
+	rm -f ../release.zip
 
 release:
 	make clean
