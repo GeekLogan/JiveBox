@@ -33,3 +33,11 @@ double sawtooth_synth(double t, int wavefreq) {
     x *= 2.0;
     return x;
 }
+
+double triangle_synth(double t, int wavefreq) {
+    double saw = sawtooth_synth(t, wavefreq);
+    if(saw < 0.0) saw *= -1.0;
+    saw *= 2.0;
+    saw -= 1.0;
+    return saw;
+}

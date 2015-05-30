@@ -18,7 +18,8 @@ long long int getTotalSamples() {
 
 double makeNoise(double t) {
 	//return fm_synth(t, 4, 9);
-	return sawtooth_synth(t, 2);
+	//return sawtooth_synth(t, 2);
+	return triangle_synth(t, 2);
 }
 
 signed short doFilters(signed short in) {
