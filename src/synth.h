@@ -1,5 +1,6 @@
 #include "constants.h"
 #include "utilities.h"
+#include "filters.h"
 #include <math.h>
 
 double sine_synth(double t, int wavefreq);
