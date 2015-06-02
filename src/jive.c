@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <math.h>
 
+
+
 #include "constants.h"
 #include "utilities.h"
 #include "synth.h"
@@ -17,9 +19,9 @@ long long int getTotalSamples() {
 }
 
 double makeNoise(double t) {
-	//return fm_synth(t, 4, 9);
+	return fm_synth(t, 4, 9);
 	//return sawtooth_synth(t, 2);
-	return triangle_synth(t, 2);
+	//return triangle_synth(t, 2);
 }
 
 signed short doFilters(signed short in) {
