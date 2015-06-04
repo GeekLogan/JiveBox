@@ -19,7 +19,7 @@ long long int getTotalSamples() {
 }
 
 double makeNoise(double t) {
-	return fm_synth(t, 4, 9);
+	return fm_synth(t, 40, 90);
 	//return sawtooth_synth(t, 2);
 	//return triangle_synth(t, 2);
 }
@@ -53,10 +53,14 @@ int main(int argCount, char ** args) {
 	sampletotal = 0;
 	samples = sampletotal;
 
-	while(getTotalSamples() < FREQUENCY) {
-		if(getTotalSamples() % 100 == 0) {
+	//while(getTotalSamples() < FREQUENCY) {
+	while(1) {
+		/*
+		if(getTotalSamples() % 200 == 0) {
 			writeBufferHumanReadable(buffer, CONSOLEWIDTH);
 		}
+		*/
+
 		writeBuffer(buffer);
 
 		double fromGenerator = makeNoise(timeDiff * getTotalSamples());

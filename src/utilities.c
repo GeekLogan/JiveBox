@@ -1,9 +1,5 @@
 #include "utilities.h"
 
-double convertSecondsToMicroSeconds(double seconds) {
-	return(seconds * 1000000);
-}
-
 void writeBuffer(union BufferType piece) {
 	fprintf(stdout, "%c%c", piece.parts[0], piece.parts[1]);
 }
@@ -29,13 +25,6 @@ void writeBufferHumanReadable(union BufferType piece, int charCount) {
 		}
 	}
 	fprintf(stderr, "|\n");
-}
-
-void delayNanoSecs(long int seconds, long int nanoseconds) {
-	struct timespec time, time2;
-	time.tv_sec = seconds;
-	time.tv_nsec = nanoseconds;
-	nanosleep(&time , &time2);
 }
 
 double addSounds(double one, double two) {

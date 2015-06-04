@@ -1,27 +1,9 @@
 all:
-	cc -o ../bin/jive jive.c filters.c synth.c utilities.c -lm
-
-old:
-	cc -o ../bin/filters filters.c -lm
-	cc -o ../bin/utilities utilities.c -lm
-	cc -o ../bin/synth synth.c -lm
-	cc -o ../bin/jive jive.c -lm
-
-mac-verbose:
-	cc -o ../bin/jive jive.c filters.c synth.c utilities.c -lm -v
-
-gnu:
-	gcc -o ../bin/jive jive.c filters.c synth.c utilities.c -lm
+	gcc -o jive jive.c filters.c synth.c utilities.c DVRGPIOInterface.c -l wiringPi -std=c99 -lm
 
 gnu-verbose:
-	gcc -o ../bin/jive jive.c filters.c synth.c utilities.c -lm -v
+	gcc -o jive jive.c filters.c synth.c utilities.c DVRGPIOInterface.c -l wiringPi -std=c99 -lm -v
 
 clean:
-	rm -f ../bin/jive
+	rm -f jive
 	rm -f TMP
-	rm -f ../release.zip
-
-release:
-	make clean
-	make
-	zip -r ../release.zip ../bin
