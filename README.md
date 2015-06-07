@@ -12,3 +12,8 @@ which is attached in the source code folder.
 This code is built to the c99 standard and should run on any
 compiler that supports the full standard, but uses the wiring pi
 library for control modules.
+
+###4. Example running command
+``
+./jive | aplay -r 44 -f S16_LE -c 1
+``
