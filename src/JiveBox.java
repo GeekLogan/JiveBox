@@ -1,4 +1,4 @@
-public class RPiRTTY {
+public class JiveBox {
 
 	private static SoundController soundOut;
 
