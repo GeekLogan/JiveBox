@@ -13,3 +13,4 @@ synth:
 	javac -d ../bin SineGen.java
 	javac -d ../bin SawtoothGen.java
 	javac -d ../bin TriangleGen.java
+	javac -d ../bin FMGen.java

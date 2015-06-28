@@ -11,8 +11,9 @@ public class JiveBox {
 			for(int g = 0; g < soundOut.soundStack.size(); g++) {
 				soundOut.soundStack.get(g).setActive(false);
 			}
-	        soundOut.soundStack.add(new SawtoothGen(80 + 10 * i));
-			soundOut.soundStack.add(new SawtoothGen(80 + 10 * i + i));
+	        //soundOut.soundStack.add(new FMGen(80 + 10 * i, 100 + 10 * i));
+			soundOut.soundStack.add(new FMGen(40, 90));
+			//soundOut.soundStack.add(new FMGen(80 + 10 * i + i));
 			pause(2000);
 			System.out.println("Time Marker C! (" + i * 10 + ")" );
 		}
