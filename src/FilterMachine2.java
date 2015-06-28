@@ -2,8 +2,8 @@ public abstract class FilterMachine2 implements FilterMachine {
 
     protected boolean active;
 
-    public FilterMachine2(int frequency) {
-        
+    public FilterMachine2() {
+
     }
 
     public double processSound(double in) {
