@@ -1,10 +1,11 @@
 public class SineGen implements SoundMachine {
 
-    private int freq = 400;
-    private boolean active = true;
+    private int freq;
+    private boolean active;
 
     public SineGen(int frequency) {
         this.freq = frequency;
+        this.active = true; 
     }
 
     public double genSound(double time) {
