@@ -17,11 +17,11 @@ public abstract class SoundMachine2 implements SoundMachine {
     }
 
     public void setActive(boolean in) {
-        active = in;
+        this.active = in;
     }
 
-    public void setFrequency(int freq) {
-
+    public void setFrequency(int frequency) {
+        this.freq = frequency;
     }
 
 }

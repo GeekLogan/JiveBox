@@ -1,6 +1,7 @@
 all:
 	make main
 	make synth
+	make filter
 
 main:
 	javac -d ../bin JiveBox.java
@@ -14,3 +15,7 @@ synth:
 	javac -d ../bin SawtoothGen.java
 	javac -d ../bin TriangleGen.java
 	javac -d ../bin FMGen.java
+
+filter:
+	javac -d ../bin FilterMachine.java
+	javac -d ../bin FilterMachine2.java
