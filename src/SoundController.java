@@ -64,7 +64,7 @@ public class SoundController extends Thread {
             try{
                 Thread.sleep(50);
             } catch (Exception e) {
-                System.err.println("Startup Timing Failed...");
+                System.err.println("Startup Timing Failed... (Will Continue Without)");
             }
         } catch( LineUnavailableException e ) {
             System.err.println("Failed to Start Data Stream!");
@@ -125,7 +125,7 @@ public class SoundController extends Thread {
                 }
             }
         }
-        isStopped = true; 
+        isStopped = true;
     }
 
     /*
