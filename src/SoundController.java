@@ -29,6 +29,7 @@ public class SoundController extends Thread {
         Interface variables
     */
     public ArrayList<SoundMachine> soundStack;
+    public ArrayList<FilterMachine> filterStack;
     public KeyStatus keys;
     private boolean stop, isStopped;
 
@@ -41,6 +42,7 @@ public class SoundController extends Thread {
         bufferIn = new short[BLOCK_SIZE];
         bufferOut = new byte[BLOCK_SIZE * 2];
         soundStack = new ArrayList<SoundMachine>();
+        filterStack = new ArrayList<FilterMachine>();
 
         stop = false;
         isStopped = false;
@@ -115,6 +117,23 @@ public class SoundController extends Thread {
                     }
                     soundBlock /= count; //scale the block down to the [-1,1] range
                     soundBlock *= MAX_SCALE; //scale up to the data range
+                }
+
+                if(filterStack.size() > 0) {
+                    try{
+                        for(FilterMachine a : filterStack) {
+                            try {
+                                if(a.isActive()) {
+                                    soundBlock = a.processSound(soundBlock);
+                                }
+                            } catch(NullPointerException e) {
+                                //Sideeffect of ConcurrentModificationException
+                                throw new ConcurrentModificationException();
+                            }
+                        }
+                    } catch(ConcurrentModificationException e) {
+                        System.err.println("Concurrent Error... (Noncritical)");
+                    }
                 }
 
                 bufferIn[index] = (short) soundBlock; //downsample to short
