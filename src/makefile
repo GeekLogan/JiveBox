@@ -21,3 +21,9 @@ filter:
 	javac -d ../bin FilterMachine2.java
 	javac -d ../bin VolumeCielFilter.java
 	javac -d ../bin VolumeFloorFilter.java
+
+keyboard:
+	cc -std=c99 -o JiveBoard JiveBoard.c
+
+keyboardTest:
+	sudo ./JiveBoard
