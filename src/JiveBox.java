@@ -4,6 +4,8 @@ public class JiveBox {
 
 	public static void main(String[] args) {
 		soundOut = new SoundController();
+
+		/*
 		System.out.println("Time Marker A!");
 		pause(2000);
 		System.out.println("Time Marker B!");
@@ -16,6 +18,11 @@ public class JiveBox {
 			//soundOut.soundStack.add(new FMGen(80 + 10 * i + i));
 			pause(2000);
 			System.out.println("Time Marker C! (" + i * 10 + ")" );
+		}
+		*/
+
+		while(true) {
+			
 		}
 	}
 

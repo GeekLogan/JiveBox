@@ -11,12 +11,16 @@
 
 #define MAX_KEY 226
 #define BUFFER_KEY KEY_LEFTSHIFT
+#define BUFFER_SIZE 1
 #define DEBUG 1
 
 int interface, ctl;
 int key_blacklist[] = {0,84,120,181,182,195,196,197,198,199};
 
 int getKeyCodeFromChar( char in );
+int writeCode( int keycode, int status );
+void toggleKey( int keycode );
+void toggleChar( char in );
 
 int main(int argc, char ** args) {
 
@@ -82,6 +86,29 @@ int main(int argc, char ** args) {
 	if(DEBUG) printf("Destroying Device...");
 	ctl = ioctl(interface, UI_DEV_DESTROY);
 
+}
+
+void toggleChar( char in ) {
+	toggleKey( getKeyCodeFromChar( in ) );
+}
+
+void toggleKey( int keycode ) {
+	writeCode( keycode, 1 );
+	writeCode( keycode, 0 );
+	for( int i = 0; i < BUFFER_SIZE; i++) {
+		writeCode( BUFFER_KEY, 1 );
+		writeCode( BUFFER_KEY, 0 );
+	}
+}
+
+
+int writeCode( int keycode, int status ) {
+	struct input_event ev;
+	memset(&ev, 0, sizeof(ev));
+	ev.type = EV_KEY;
+	ev.code = keycode;
+	ev.value = status;
+	return write( interface, &ev, sizeof(ev) );
 }
 
 int getKeyCodeFromChar( char in ) {

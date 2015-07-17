@@ -23,7 +23,7 @@ filter:
 	javac -d ../bin VolumeFloorFilter.java
 
 keyboard:
-	cc -std=c99 -o JiveBoard JiveBoard.c
+	cc -std=c99 -o ../bin/JiveBoard JiveBoard.c
 
 keyboardTest:
 	sudo ./JiveBoard
