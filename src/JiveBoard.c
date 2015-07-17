@@ -60,28 +60,12 @@ int main(int argc, char ** args) {
 	ctl = write(interface, &uidev, sizeof(uidev));
 	ctl = ioctl(interface, UI_DEV_CREATE);
 
-	/*
-	printf("Writing Test Keys...\n");
+	if(DEBUG) printf("Writing Test Keys...\n");
 	for(int i = 'a'; i <= 'z'; i++) {
 		printf("(%d)\n", i);
-		struct input_event ev;
-		memset(&ev, 0, sizeof(ev));
-		ev.type = EV_KEY;
-		ev.code = getKeyCodeFromChar((char) i);
-		ev.value = 1;
-		ctl = write(interface, &ev, sizeof(ev));
-		ev.value = 0;
-		ctl = write(interface, &ev, sizeof(ev));
-		ev.code = BUFFER_KEY;
-		for(int j = 0; j < 3; j++) {
-			ev.value = 1;
-			ctl = write(interface, &ev, sizeof(ev));
-			ev.value = 0;
-			ctl = write(interface, &ev, sizeof(ev));
-		}
+		toggleChar( i );
 		sleep(1);
 	}
-	*/
 
 	if(DEBUG) printf("Destroying Device...");
 	ctl = ioctl(interface, UI_DEV_DESTROY);
