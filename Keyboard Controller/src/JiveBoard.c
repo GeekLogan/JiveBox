@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <wiringPi.h>
+
 #include <string.h>
 #include <unistd.h>
 #include <time.h>
@@ -9,23 +11,55 @@
 #include <linux/input.h>
 #include <linux/uinput.h>
 
+#define UINPUT_MODULE_LOCATION "/dev/uinput"
 #define MAX_KEY 226
 #define BUFFER_KEY KEY_LEFTSHIFT
-#define BUFFER_SIZE 1
-#define DEBUG 1
+#define BUFFER_SIZE 3
+#define DEBUG 0
+
+#define OEPINCOUNT 4
+#define BUTTONPINCOUNT 8
+#define LIGHTCOUNT 23
+
+#define CLOCKPIN 9
+#define DATAPIN 8
 
 int interface, ctl;
 int key_blacklist[] = {0,84,120,181,182,195,196,197,198,199};
+
+int OEOut[] = {7,0,2,3};
+int ButtonsIn[] = {12,13,14,11,10,6,5,4};
+int status[BUTTONPINCOUNT * OEPINCOUNT];
+int lightStatus[LIGHTCOUNT];
+
+void writeLights();
+void setLight(int pin, int in);
+int mapLight(int id);
+void clearAllOE();
+int mapkey(int oe, int qpin);
+void updateGPIO();
+void setupGPIO();
 
 int getKeyCodeFromChar( char in );
 int writeCode( int keycode, int status );
 void toggleKey( int keycode );
 void toggleChar( char in );
 
-int main(int argc, char ** args) {
+void initUINPUT();
+void destroyUINPUT();
 
+int main(int argc, char ** args) {
+	setupGPIO();
+	initUINPUT();
+	while(1) {
+		updateGPIO();
+		delay(1);
+	}
+}
+
+void initUINPUT() {
 	if(DEBUG) printf("Opening Device...\n");
-	interface = open("/dev/uinput", O_WRONLY | O_NONBLOCK);
+	interface = open(UINPUT_MODULE_LOCATION, O_WRONLY | O_NONBLOCK);
 	//Make Interface
 	if(interface < 0) { //Check if device was made
 		fprintf(stderr, "Device Opening Failed (ERR# %d)...\n", interface);
@@ -59,17 +93,99 @@ int main(int argc, char ** args) {
 
 	ctl = write(interface, &uidev, sizeof(uidev));
 	ctl = ioctl(interface, UI_DEV_CREATE);
+}
 
-	if(DEBUG) printf("Writing Test Keys...\n");
-	for(int i = 'a'; i <= 'z'; i++) {
-		printf("(%d)\n", i);
-		toggleChar( i );
-		sleep(1);
-	}
-
+void destroyUNINPUT() {
 	if(DEBUG) printf("Destroying Device...");
 	ctl = ioctl(interface, UI_DEV_DESTROY);
+}
 
+void writeLights() {
+	digitalWrite(CLOCKPIN, LOW);
+	for(int i = LIGHTCOUNT; i >= 0; i--) {
+		digitalWrite(DATAPIN, lightStatus[i]);
+		digitalWrite(CLOCKPIN, HIGH);
+		digitalWrite(CLOCKPIN, LOW);
+	}
+}
+
+void setLight(int pin, int in) {
+	if(pin < 0 || pin >= LIGHTCOUNT) return;
+	lightStatus[pin] = in;
+	writeLights();
+}
+
+int mapLight(int id) {
+	if(id >= 16) {
+		if(id <= 18) return(26 - id);
+		if(id <= 23) return(id - 8);
+		if(id <= 26) return(26 - id);
+		if(id <= 31) return(id - 24);
+	}
+	return -1;
+}
+
+void clearAllOE() {
+	for(int i = 0; i < OEPINCOUNT; i++) 
+		digitalWrite(OEOut[i], HIGH);
+}
+
+int mapkey(int oe, int qpin) {
+	return (BUTTONPINCOUNT * oe) + qpin;
+}
+
+void updateGPIO() {
+	for(int j = 0; j < OEPINCOUNT; j++) {
+		clearAllOE();
+		digitalWrite(OEOut[j], LOW);
+		for(int k = 0; k < BUTTONPINCOUNT; k++) {
+			if(k == 0) delayMicroseconds(1);
+			int id = mapkey(j,k);
+			int new = digitalRead(ButtonsIn[k]);
+			if(status[id] != new) {
+				status[id] = new;
+				int lightId = mapLight(id);
+				if(new) {
+					if(DEBUG) printf("Button Up!  ");
+					setLight(lightId, LOW);
+					toggleChar('u');
+				} else {
+					if(DEBUG) printf("Button Down!");
+					setLight(lightId, HIGH);
+					toggleChar('d');
+				}
+				if(DEBUG) {
+					printf(" (%d) [%d] <", id, lightId);
+					for(int i = 0; i < LIGHTCOUNT; i++) {
+						printf("%d", lightStatus[i]);
+					}
+					printf("> \n");
+				}
+			}
+		}
+	}
+}
+
+void setupGPIO() {
+	wiringPiSetup();
+	for(int i = 0; i < OEPINCOUNT; i++) {
+		pinMode(OEOut[i], OUTPUT);
+	}
+	clearAllOE();
+	for(int i = 0; i < BUTTONPINCOUNT; i++) {
+		int pin = ButtonsIn[i];
+		pinMode(pin, INPUT);
+		pullUpDnControl(pin, PUD_DOWN);
+	}
+	pinMode(DATAPIN, OUTPUT);
+	pinMode(CLOCKPIN, OUTPUT);
+	for(int i = 0; i < BUTTONPINCOUNT * OEPINCOUNT; i++) {
+		status[i] = HIGH;
+	}
+	for(int i = 0; i < LIGHTCOUNT; i++) {
+		lightStatus[i] = LOW;
+	}
+	writeLights();
 }
 
 void toggleChar( char in ) {
@@ -126,3 +242,4 @@ int getKeyCodeFromChar( char in ) {
 	}
 	return KEY_UNKNOWN;
 }
+
