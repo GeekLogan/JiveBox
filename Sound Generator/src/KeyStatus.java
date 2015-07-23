@@ -22,6 +22,7 @@ public class KeyStatus {
 
 		if(id < 0 || id > 31) return; //bad id
 
+		//soundOut.soundStack.add(new FMGen(80 + 10 * i, 100 + 10 * i));
 		/* do stuff here */
 
 	}
