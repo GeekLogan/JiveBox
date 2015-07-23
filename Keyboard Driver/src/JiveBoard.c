@@ -13,7 +13,7 @@
 
 #define UINPUT_MODULE_LOCATION "/dev/uinput"
 #define MAX_KEY 226
-#define BUFFER_KEY KEY_LEFTSHIFT
+#define BUFFER_KEY KEY_ENTER
 #define BUFFER_SIZE 1
 #define DEBUG 0
 
@@ -127,7 +127,7 @@ int mapLight(int id) {
 }
 
 void clearAllOE() {
-	for(int i = 0; i < OEPINCOUNT; i++) 
+	for(int i = 0; i < OEPINCOUNT; i++)
 		digitalWrite(OEOut[i], HIGH);
 }
 
@@ -242,7 +242,7 @@ int getKeyCodeFromChar( char in ) {
 		case 'x': return KEY_X;
 		case 'y': return KEY_Y;
 		case 'z': return KEY_Z;
-		
+
 		case '1': return KEY_1;
 		case '2': return KEY_2;
 		case '3': return KEY_3;
@@ -294,4 +294,3 @@ char mapKeyToChar(int in) {
 	}
 	return ' '; //fail if id out of above ranges
 }
-

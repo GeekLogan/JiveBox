@@ -30,7 +30,6 @@ public class SoundController extends Thread {
     */
     public ArrayList<SoundMachine> soundStack;
     public ArrayList<FilterMachine> filterStack;
-    public KeyStatus keys;
     private boolean stop, isStopped;
 
     /*
@@ -74,15 +73,7 @@ public class SoundController extends Thread {
             System.exit(3);
         }
 
-        keys = new KeyStatus();
         this.start();
-    }
-
-    /*
-        Getter method for key status.
-    */
-    public KeyStatus getKeys() {
-        return keys;
     }
 
     /*
