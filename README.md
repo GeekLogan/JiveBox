@@ -11,7 +11,9 @@ which is attached in the source code folder.
 The program is written using Sun Java 7 SE, and will not run correctly under OpenJDK.
 
 The RaspberryPi DVR777 interface is written using the following libraries on the C99 code standard:
+
 1. WiringPi
+
 2. Linux UInput (the code assumes uinput device at /dev/uinput)
 
 ###4. Example running command
