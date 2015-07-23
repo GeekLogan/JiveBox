@@ -14,7 +14,7 @@
 #define UINPUT_MODULE_LOCATION "/dev/uinput"
 #define MAX_KEY 226
 #define BUFFER_KEY KEY_LEFTSHIFT
-#define BUFFER_SIZE 3
+#define BUFFER_SIZE 1
 #define DEBUG 0
 
 #define OEPINCOUNT 4
@@ -47,6 +47,7 @@ void toggleChar( char in );
 
 void initUINPUT();
 void destroyUINPUT();
+char mapKeyToChar(int in);
 
 int main(int argc, char ** args) {
 	setupGPIO();
@@ -154,6 +155,7 @@ void updateGPIO() {
 					setLight(lightId, HIGH);
 					toggleChar('d');
 				}
+				toggleChar( mapKeyToChar(id) );
 				if(DEBUG) {
 					printf(" (%d) [%d] <", id, lightId);
 					for(int i = 0; i < LIGHTCOUNT; i++) {
@@ -239,7 +241,57 @@ int getKeyCodeFromChar( char in ) {
 		case 'w': return KEY_W;
 		case 'x': return KEY_X;
 		case 'y': return KEY_Y;
-	}
+		case 'z': return KEY_Z;
+		
+		case '1': return KEY_1;
+		case '2': return KEY_2;
+		case '3': return KEY_3;
+		case '4': return KEY_4;
+		case '5': return KEY_5;
+		case '6': return KEY_6;
+		case '7': return KEY_7;
+		case '8': return KEY_8;
+		case '9': return KEY_9;
+		case '0': return KEY_0;
+ 	}
 	return KEY_UNKNOWN;
+}
+
+char mapKeyToChar(int in) {
+	switch(in) {
+		case 0: return '1';
+		case 1: return 'v';
+		case 2: return 'u';
+		case 3: return '2';
+		case 4: return '0';
+		case 5: return '4';
+		case 6: return '3';
+		case 7: return '5';
+		case 8: return 'r';
+		case 9: return 'w';
+		case 10: return 'q';
+		case 11: return 'x';
+		case 12: return 's';
+		case 13: return 'y';
+		case 14: return 't';
+		case 15: return 'z';
+		case 16: return 'f';
+		case 17: return 'm';
+		case 18: return 'e';
+		case 19: return 'n';
+		case 20: return 'g';
+		case 21: return 'o';
+		case 22: return 'h';
+		case 23: return 'p';
+		case 24: return 'b';
+		case 25: return 'i';
+		case 26: return 'a';
+		case 27: return 'j';
+		case 28: return 'c';
+		case 29: return 'k';
+		case 30: return 'd';
+		case 31: return 'l';
+	}
+	return ' '; //fail if id out of above ranges
 }
 
