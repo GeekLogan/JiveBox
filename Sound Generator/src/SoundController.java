@@ -104,7 +104,9 @@ public class SoundController extends Thread {
                             }
                         }
                     } catch(ConcurrentModificationException e) {
-                        System.err.println("Concurrent Error... (Noncritical)");
+                        if( JiveBox.DEBUG ) {
+				System.err.println("Concurrent Error... (Noncritical)");
+			}
                     }
                     soundBlock /= count; //scale the block down to the [-1,1] range
                     soundBlock *= MAX_SCALE; //scale up to the data range
