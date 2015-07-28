@@ -1,8 +1,8 @@
 public class FMGen extends SoundMachine2 {
 
-    protected int freq2;
+    protected double freq2;
 
-    public FMGen(int frequency1, int frequency2) {
+    public FMGen(double frequency1, double frequency2) {
         super(frequency1);
         this.freq2 = frequency2;
     }

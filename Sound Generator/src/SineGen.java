@@ -2,9 +2,9 @@ public class SineGen extends SoundMachine2 {
 
     double startTime;
 
-    public SineGen(int frequency) {
+    public SineGen(double frequency) {
         super(frequency);
-	startTime = 0;
+        startTime = 0;
     }
 
     public double genSound(double time) {

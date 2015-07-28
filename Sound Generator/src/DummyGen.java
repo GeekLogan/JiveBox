@@ -1,7 +1,7 @@
 public class DummyGen extends SoundMachine2 {
 
-    public DummyGen(int frequency) {
-	super(frequency);
+    public DummyGen(double frequency) {
+	    super(frequency);
         //Do nothing
     }
 

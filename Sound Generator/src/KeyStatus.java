@@ -2,10 +2,12 @@ public class KeyStatus {
 
 	private SoundMachine[] keyThreads;
 	private SoundController soundOut;
+	private TuningFork tuning;
 
 	public KeyStatus( SoundController sc ) {
 		soundOut = sc;
 		keyThreads = new SoundMachine[16];
+		tuning = new TuningFork(440);
 	}
 
 	public void processCommand(char cmd, char key) {
@@ -85,8 +87,13 @@ public class KeyStatus {
 		return -1;
 	}
 
+	protected int octaveMap( int keyID ) {
+		return keyID;
+	}
+
 	protected SoundMachine getGenMapping( int keyID ) {
-		return new SineGen(400 + (keyID - 16) * 13);
+		int mapped = octaveMap(keyID);
+		return new SineGen( tuning.calculateSteps(mapped) );
 	}
 
 }

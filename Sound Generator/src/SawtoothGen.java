@@ -1,6 +1,6 @@
 public class SawtoothGen extends SoundMachine2 {
 
-    public SawtoothGen(int frequency) {
+    public SawtoothGen(double frequency) {
         super(frequency);
     }
 

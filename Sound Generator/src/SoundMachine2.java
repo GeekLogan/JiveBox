@@ -1,9 +1,9 @@
 public abstract class SoundMachine2 implements SoundMachine {
 
-    protected int freq;
+    protected double freq;
     protected boolean active;
 
-    public SoundMachine2(int frequency) {
+    public SoundMachine2(double frequency) {
         this.freq = frequency;
         this.active = true;
     }
@@ -20,7 +20,7 @@ public abstract class SoundMachine2 implements SoundMachine {
         this.active = in;
     }
 
-    public void setFrequency(int frequency) {
+    public void setFrequency(double frequency) {
         this.freq = frequency;
     }
 

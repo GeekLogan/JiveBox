@@ -4,6 +4,6 @@ public interface SoundMachine {
     public double genSound(double time);
     public boolean isActive();
     public void setActive(boolean in);
-    public void setFrequency(int freq);
+    public void setFrequency(double freq);
 
 }
