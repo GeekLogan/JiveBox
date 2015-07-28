@@ -1,29 +1,47 @@
 public class KeyStatus {
 
-	private boolean[] keys;
+	private SoundMachine[] keyThreads;
 	private SoundController soundOut;
 
 	public KeyStatus( SoundController sc ) {
-
 		soundOut = sc;
-		keys = new boolean[32];
-
+		keyThreads = new SoundMachine[16];
 	}
 
 	public void processCommand(char cmd, char key) {
 		byte id = keyId(key);
 
-		if(JiveBox.DEBUG) {
+		if( JiveBox.DEBUG ) {
 			String cmd_name = "Error";
-			if(cmd == 'u') cmd_name = "Released";
-			if(cmd == 'd') cmd_name = "Pressed";
+			if( cmd == 'u' ) cmd_name = "Released";
+			if( cmd == 'd' ) cmd_name = "Pressed";
 			System.out.println("Command -> " + cmd_name + " : " + key + " [" + id + ']');
 		}
 
-		if(id < 0 || id > 31) return; //bad id
+		if( id < 0 || id > 31 ) return; //bad id
 
 		//soundOut.soundStack.add(new FMGen(80 + 10 * i, 100 + 10 * i));
 		/* do stuff here */
+
+		if( id >= 16 ) {
+			int threadID = id - 16;
+			if( cmd == 'u' ) {
+				if( keyThreads[threadID] != null ) {
+					//all references to the thread must be
+					//killed for memory management
+					soundOut.soundStack.remove( keyThreads[threadID] );
+					keyThreads[threadID] = null;
+				}
+			} else if ( cmd == 'd' ) {
+				if( keyThreads[threadID] == null) {
+					keyThreads[threadID] = getGenMapping(threadID);
+					soundOut.soundStack.add( keyThreads[threadID] );
+				}
+			} else {
+				//If you are here something
+				//has gone horibly wrong
+			}
+		}
 
 	}
 
@@ -65,6 +83,10 @@ public class KeyStatus {
 			case '5': return 7;
 		}
 		return -1;
+	}
+
+	protected SoundMachine getGenMapping( int keyID ) {
+		return new SineGen(100 + (keyID - 16) * 13);
 	}
 
 }
