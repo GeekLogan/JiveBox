@@ -86,7 +86,7 @@ public class KeyStatus {
 	}
 
 	protected SoundMachine getGenMapping( int keyID ) {
-		return new SineGen(100 + (keyID - 16) * 13);
+		return new SineGen(400 + (keyID - 16) * 13);
 	}
 
 }
