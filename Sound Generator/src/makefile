@@ -9,6 +9,7 @@ main:
 	javac -d ../bin KeyStatus.java
 
 synth:
+	javac -d ../bin TuningFork.java
 	javac -d ../bin SoundMachine.java
 	javac -d ../bin SoundMachine2.java
 	javac -d ../bin SineGen.java
