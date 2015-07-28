@@ -18,15 +18,15 @@ public class JiveBox {
 		BufferedReader br = new BufferedReader( new InputStreamReader(System.in) );
 
 		while(true) {
-
 			try {
+				//commands are passed as two line-escaped sequences
+				//of one char
 				char cmd = br.readLine().charAt(0);
 				char key = br.readLine().charAt(0);
 				keys.processCommand(cmd, key);
 			} catch (IOException e ) {
 				e.printStackTrace();
 			}
-
 		}
 	}
 
