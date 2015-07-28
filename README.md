@@ -1,5 +1,7 @@
 # JiveBox
 
+Important Note: Binaries included in "bin" folders may not be completely up to date builds
+
 ###1. Project Goals
 JiveBox seeks to build a modular Java-based synthesizer that can be used for music production.
 
@@ -26,3 +28,12 @@ java JiveBox #runs actual program
 ``
 
 ###5. Control Interface
+Commands are passed to the synth through stdin as combinations of two line-escaped chars
+
+Ex:
+``
+d \n
+a \n
+``
+
+The above sequence would tell the program to press the `a` (key 26, part of midi controller) key `d` (down).
