@@ -13,7 +13,8 @@ public class SoundController extends Thread {
     public static final int sampleRate = 44100;
     public static final double PI = Math.PI;
     public static final double TAU = 2 * PI;
-    public static final int sectioning = 2;
+    public static final int sectioning = 25; // how many buffers fill 1 sec
+	//25 = 1/25 sec per buffer = 40ms max latency < 1/2 a blink of an eye
     public static final int BLOCK_SIZE = sampleRate / sectioning;
     public static final double BLOCK_TIME_SIZE = 1000 / sectioning;
 
@@ -60,7 +61,7 @@ public class SoundController extends Thread {
         }
 
         try{
-            dataLine.open(format);
+            dataLine.open(format, bufferOut.length);
             dataLine.start();
             try{
                 Thread.sleep(50);
@@ -131,7 +132,7 @@ public class SoundController extends Thread {
 
                 bufferIn[index] = (short) soundBlock; //downsample to short
 
-                if(index == 0) {
+                if(index == BLOCK_SIZE - 1) {
                     syncBuffer(); //transfer in buffer => out buffer
                     flushBuffer(); //clear out buffer to sound card
                 }
