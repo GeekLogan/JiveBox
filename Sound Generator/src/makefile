@@ -15,6 +15,7 @@ synth:
 	javac -d ../bin SawtoothGen.java
 	javac -d ../bin TriangleGen.java
 	javac -d ../bin FMGen.java
+	javac -d ../bin DummyGen.java
 
 filter:
 	javac -d ../bin FilterMachine.java

@@ -12,11 +12,11 @@ public class JiveBox {
 
 		soundOut = new SoundController();
 		keys = new KeyStatus( soundOut );
+		soundOut.soundStack.add( new DummyGen(0) );
 
 		pause(500);
-
 		BufferedReader br = new BufferedReader( new InputStreamReader(System.in) );
-
+		
 		while(true) {
 			try {
 				//commands are passed as two line-escaped sequences
