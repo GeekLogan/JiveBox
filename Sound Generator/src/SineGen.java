@@ -1,11 +1,15 @@
 public class SineGen extends SoundMachine2 {
 
+    double startTime;
+
     public SineGen(int frequency) {
         super(frequency);
+	startTime = 0;
     }
 
     public double genSound(double time) {
-        return Math.sin( time * freq * SoundController.TAU );
+	if(startTime == 0) startTime = time;
+        return Math.sin( (time - startTime) * freq * SoundController.TAU );
     }
 
 }
