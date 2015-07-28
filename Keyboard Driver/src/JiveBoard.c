@@ -23,6 +23,7 @@
 
 #define CLOCKPIN 9
 #define DATAPIN 8
+#define HDDPIN 7
 
 int interface, ctl;
 int key_blacklist[] = {0,84,120,181,182,195,196,197,198,199};
@@ -170,6 +171,8 @@ void updateGPIO() {
 
 void setupGPIO() {
 	wiringPiSetup();
+	pinMode(HDDPIN, OUTPUT);
+	digitalWrite(HDDPIN, HIGH);
 	for(int i = 0; i < OEPINCOUNT; i++) {
 		pinMode(OEOut[i], OUTPUT);
 	}
@@ -187,6 +190,9 @@ void setupGPIO() {
 	for(int i = 0; i < LIGHTCOUNT; i++) {
 		lightStatus[i] = LOW;
 	}
+	delay(10);
+	setLight(22, HIGH);
+	delay(10);
 	writeLights();
 }
 
