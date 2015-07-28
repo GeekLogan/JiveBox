@@ -8,7 +8,7 @@ public class SineGen extends SoundMachine2 {
     }
 
     public double genSound(double time) {
-	if(startTime == 0) startTime = time;
+        if(startTime == 0) startTime = time;
         return Math.sin( (time - startTime) * freq * SoundController.TAU );
     }
 

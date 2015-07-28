@@ -3,11 +3,13 @@ public class KeyStatus {
 	private SoundMachine[] keyThreads;
 	private SoundController soundOut;
 	private TuningFork tuning;
+	private int offset;
 
 	public KeyStatus( SoundController sc ) {
 		soundOut = sc;
 		keyThreads = new SoundMachine[16];
 		tuning = new TuningFork(440);
+		offset = 4;
 	}
 
 	public void processCommand(char cmd, char key) {
@@ -88,11 +90,23 @@ public class KeyStatus {
 	}
 
 	protected int octaveMap( int keyID ) {
-		return keyID;
+		switch(keyID) {
+			case 25: return -9; //Cn
+			case 27: return -7; //Dn
+			case 29: return -5; //En
+			case 31: return -4; //Fn
+			case 17: return -2; //Gn
+			case 19: return +0; //An
+			case 21: return +2; //Bn
+			case 23: return +3; //Cn+1
+		}
+
+		return 0;
 	}
 
 	protected SoundMachine getGenMapping( int keyID ) {
 		int mapped = octaveMap(keyID);
+		mapped += (offset - 4);
 		return new SineGen( tuning.calculateSteps(mapped) );
 	}
 
